@@ -1,7 +1,7 @@
 export interface GovernanceConcept {
   id: string;
   title: string;
-  pillar: 'Good Governance' | 'E-Governance & DPI' | 'Accountability & RTI' | 'Citizen Charter' | 'Civil Services';
+  pillar: 'Good Governance' | 'E-Governance & DPI' | 'Accountability & RTI' | 'Citizen Charter' | 'Civil Services' | 'Development Industry & NGOs' | 'Scheme Design & CSS';
   summary: string;
   theoreticalFramework: string;
   institutionalMechanisms: string[];
@@ -155,6 +155,52 @@ export const GOVERNANCE_MODULES: GovernanceConcept[] = [
     officialSource: 'DARPG, Government of India & 2nd Administrative Reforms Commission'
   },
   {
+    id: 'gov-accountability-transparency',
+    title: 'Transparency and Accountability: Horizontal vs Vertical, Social Audit, and RTI',
+    pillar: 'Accountability & RTI',
+    summary: 'The twin pillars of democratic governance ensuring that public officials are answerable for their actions, fiscal appropriations, and policy choices.',
+    theoreticalFramework: 'Horizontal Accountability: Checks and balances exercised by independent constitutional/statutory institutions (CAG, CVC, Lokpal, Judiciary). Vertical Accountability: Direct citizen oversight through elections, RTI, civil society activism, and media scrutiny.',
+    institutionalMechanisms: [
+      'Right to Information (RTI) Act, 2005 (Section 4 proactive disclosure mandates).',
+      'Social Audit Units (statutorily mandated under Section 17 of MGNREGA 2005; Meghalaya Community Participation and Public Services Social Audit Act 2017).',
+      'Whistleblowers Protection Act, 2014 (framework for protecting persons reporting public corruption).',
+      'Lokpal and Lokayuktas Act, 2013 (Apex anti-corruption ombudsman).'
+    ],
+    challengesInPractice: [
+      'RTI Amendment Act 2019: Diluted statutory autonomy of Information Commissioners by granting Centre power to determine tenure and salaries.',
+      'Abuse of Section 8 exemptions (national security, commercial confidence, personal privacy) to deny public interest information.',
+      'High rate of physical attacks and murders of RTI activists and whistleblowers.',
+      'Social Audits diluted by local political-contractor nexus and delayed state funding.'
+    ],
+    reformsAndSolutions: [
+      'Operationalize Whistleblowers Protection Act rules; establish witness protection protocols.',
+      'Make proactive digital disclosure under Section 4(1)(b) of RTI Act verifiable and automated.',
+      'Empower Social Audit findings with automatic recovery and disciplinary penalties.'
+    ],
+    caseStudies: [
+      {
+        title: 'Meghalaya Social Audit Law',
+        desc: 'First state in India to pass a comprehensive Social Audit Act covering 21 government programs, institutionalizing village social audit facilitators.',
+        source: 'Government of Meghalaya 2017'
+      },
+      {
+        title: 'MKSS Jan Sunwai Model',
+        desc: 'Mazdoor Kisan Shakti Sangathan organized public audits of muster rolls in Rajasthan, proving that phantom workers were being paid while poor laborers starved.',
+        source: 'MKSS Movement Archives'
+      }
+    ],
+    prelimsPointers: [
+      'Meghalaya was the first state in India to pass a dedicated Social Audit Act.',
+      'RTI Act 2005 replaced the Freedom of Information Act, 2002.',
+      'Chief Information Commissioner is appointed by the President on recommendation of a committee consisting of PM, LoP in Lok Sabha, and a Union Cabinet Minister.'
+    ],
+    mainsPointers: [
+      '"Information is the currency of democracy." Critically examine the impact of recent legislative amendments and administrative delays on the efficacy of the RTI Act.',
+      'Analyze the concept of Social Audit and discuss its limitations in institutionalizing bureaucratic accountability.'
+    ],
+    officialSource: '2nd ARC 1st Report "Right to Information: Master Key to Good Governance"'
+  },
+  {
     id: 'gov-civil-services-reforms',
     title: 'Civil Services in a Democracy: Role, Neutrality, Anonymity, and Administrative Reforms',
     pillar: 'Civil Services',
@@ -200,5 +246,96 @@ export const GOVERNANCE_MODULES: GovernanceConcept[] = [
       'Evaluate the arguments for and against Lateral Entry in civil services. How can domain expertise be inducted without compromising affirmative action and institutional esprit de corps?'
     ],
     officialSource: 'Department of Personnel and Training (DoPT) & Capacity Building Commission'
+  },
+  {
+    id: 'gov-development-processes-ngos-shgs',
+    title: 'Development Processes & Third Sector: Role of NGOs, SHGs, Cooperatives, and Social Capital',
+    pillar: 'Development Industry & NGOs',
+    summary: 'The non-state institutional architecture (Third Sector) bridging the gap between state delivery deficits and citizen aspirations through community mobilization.',
+    theoreticalFramework: 'Robert Putnam’s Social Capital Theory (Bonding and Bridging social capital). Subsidiarity principle: Issues should be handled by the smallest, lowest, or least centralized competent authority.',
+    institutionalMechanisms: [
+      'Article 19(1)(c) right to form associations/cooperatives; Article 43B DPSP promotion of cooperatives.',
+      'Part IXB of Constitution (Multi-State Cooperatives).',
+      'Foreign Contribution (Regulation) Act (FCRA) 2010 (Amended 2020) and NITI Aayog NGO-DARPAN accreditation.',
+      'Deendayal Antyodaya Yojana - National Rural Livelihoods Mission (DAY-NRLM) SHG mobilization framework.'
+    ],
+    challengesInPractice: [
+      'Tightening regulatory oversight: Over 6,000 NGOs lost FCRA licenses between 2015 and 2023 for alleged accounting violations.',
+      'Politicization and capture of cooperatives by local agrarian elites (sugar lobby in Maharashtra/Karnataka).',
+      'Micro-finance over-indebtedness among rural women SHGs.',
+      'Lack of professional managerial capacity and poor digital marketing linkages for community collectives.'
+    ],
+    reformsAndSolutions: [
+      'Self-regulatory standards for civil society organizations.',
+      'Computerization of 63,000 Primary Agricultural Credit Societies (PACS) with unified ERP software.',
+      'Lakhpati Didi scheme providing market linkages, branding, and micro-enterprise capital to SHG women.'
+    ],
+    caseStudies: [
+      {
+        title: 'Kudumbashree (Kerala)',
+        desc: 'Poverty eradication and women empowerment mission organizing 45 lakh women into neighborhood groups, operating community canteens, agro-enterprises, and panchayat planning.',
+        source: 'State Poverty Eradication Mission, Kerala'
+      },
+      {
+        title: 'Mahila Arthik Vikas Mahamandal (MAVIM, Maharashtra)',
+        desc: 'Self-sustaining Community Managed Resource Centres (CMRCs) bridging credit, legal counseling, and agribusiness linkages for rural women.',
+        source: 'Govt of Maharashtra'
+      }
+    ],
+    prelimsPointers: [
+      'National Policy on Voluntary Sector was formulated in 2007 by the Planning Commission.',
+      'Supreme Court in Union of India v. Rajendra N. Shah (2021) struck down Part IXB provisions concerning State cooperatives, upholding it only for Multi-State Co-operative Societies (MSCS).',
+      'Ministry of Cooperation was created in July 2021 with the motto "Sahakar se Samriddhi".'
+    ],
+    mainsPointers: [
+      'Analyze the role of Self-Help Groups (SHGs) as vehicles of socio-economic empowerment. How can the "Lakhpati Didi" initiative scale grassroots rural entrepreneurship?',
+      'Critically evaluate the recent amendments to the FCRA Act. How can the state balance national security imperatives with democratic civil society freedoms?'
+    ],
+    officialSource: 'Ministry of Cooperation, Ministry of Rural Development & NITI Aayog'
+  },
+  {
+    id: 'gov-css-rationalisation',
+    title: 'Government Policies, Scheme Design & Centrally Sponsored Schemes (CSS) Rationalisation',
+    pillar: 'Scheme Design & CSS',
+    summary: 'The policy architecture of developmental interventions, examining the design, fiscal federal dynamics, and structural implementation bottlenecks of Centrally Sponsored Schemes.',
+    theoreticalFramework: 'Fiscal Federalism & Principle of Subsidiarity. Classification into: (1) Core of the Core schemes (e.g., MGNREGA), (2) Core schemes (e.g., PM-JAY, Jal Jeevan Mission, Samagra Shiksha), and (3) Optional schemes.',
+    institutionalMechanisms: [
+      'NITI Aayog Sub-Group of Chief Ministers on Rationalisation of Centrally Sponsored Schemes (Chaired by Shivraj Singh Chouhan, 2015).',
+      'Public Financial Management System (PFMS) with Single Nodal Account (SNA) tracking for Just-in-Time fund releases.',
+      'Direct Benefit Transfer (DBT) Mission eliminating middlemen and leakage.'
+    ],
+    challengesInPractice: [
+      'One-size-fits-all design: Rigid national guidelines that fail to accommodate agro-climatic and socio-economic diversity across States.',
+      'Fiscal stress on States: Standard 60:40 or 50:50 sharing patterns lock up State fiscal resources in matching funds, reducing state policy flexibility.',
+      'Under-utilization of funds due to conditionalities and delayed release of central shares.',
+      'Proliferation of umbrella schemes resulting in administrative fragmentation and duplication.'
+    ],
+    reformsAndSolutions: [
+      'Flexi-funds window: Increasing flexible funding quota for States from 10% to 25% of CSS allocation to cater to local priorities.',
+      'Sunset Clauses and mandatory third-party independent outcome evaluations before scheme extension.',
+      'Just-in-Time funding through SNA model preventing unspent parking of funds in commercial bank accounts.'
+    ],
+    caseStudies: [
+      {
+        title: 'Single Nodal Account (SNA) Sparsh Model',
+        desc: 'Revamped CSS fund flow mechanism where central funds are disbursed directly to vendor/beneficiary accounts upon bill generation, saving thousands of crores in interest float.',
+        source: 'Department of Expenditure, Ministry of Finance 2022'
+      },
+      {
+        title: 'Swachh Bharat Mission (Grameen)',
+        desc: 'World\'s largest behavioral change sanitation campaign, constructing over 11 crore household latrines and achieving Open Defecation Free (ODF) declarations backed by geo-tagging verification.',
+        source: 'Ministry of Jal Shakti'
+      }
+    ],
+    prelimsPointers: [
+      'Under the NITI Aayog Sub-Group recommendations, CSS sharing pattern is 60:40 for general states, 90:10 for 8 North Eastern and 3 Himalayan States, and 100% central funding for UTs without legislatures.',
+      'Public Financial Management System (PFMS) is administered by the Controller General of Accounts (CGA), Department of Expenditure.',
+      'Core of the Core schemes (like MGNREGA, National Social Assistance Programme) maintain their pre-existing funding pattern.'
+    ],
+    mainsPointers: [
+      '"Centrally Sponsored Schemes have distorted state priorities and eroded fiscal federalism." Critically evaluate in the light of the NITI Aayog Sub-Group recommendations on CSS rationalisation.',
+      'Examine the design and implementation challenges of flagship schemes like Smart Cities Mission and Beti Bachao Beti Padhao. Why has behavior change proven harder than physical infrastructure creation?'
+    ],
+    officialSource: 'NITI Aayog Report of the Sub-Group of Chief Ministers on CSS 2015'
   }
 ];

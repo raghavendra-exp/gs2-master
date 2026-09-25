@@ -271,6 +271,7 @@ export interface CountryRelationship {
   keyAgreements: string[];
   pyqs: string[];
   officialSource: string;
+  upRelevance?: string;
 }
 
 export interface RegionalGrouping {

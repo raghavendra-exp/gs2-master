@@ -171,5 +171,174 @@ export const POLITY_TOPICS: TopicItem[] = [
     ],
     lastVerified: '2026-09-24',
     claimType: 'ANALYSIS'
+  },
+  {
+    id: 'topic-centre-state-relations-emergency-governor',
+    title: 'Centre-State Relations, 7th Schedule Principles, Emergency Provisions & Role of Governor',
+    category: 'Polity',
+    subtopic: 'Inter-State Relations & Federal Friction Points',
+    examRelevance: ['UPSC', 'UPPSC', 'State PSC'],
+    examSpecificNotes: {
+      upsc: 'Focus on 7th schedule doctrines (pith & substance, colorable legislation, repugnancy Art 254), cesses/surcharges, Article 356 misuse, and Sarkaria/Punchhi commission norms.',
+      uppsc: 'Focus on UP Governor role, Inter-State water issues (Yamuna/Betwa water accords), and State Finance Commission recommendations.'
+    },
+    summary: 'Comprehensive analysis of Legislative (Arts 245-255), Administrative (Arts 256-263), and Financial relations (Arts 268-293), Inter-State disputes, Emergency powers, and the constitutional friction surrounding the Governor\'s office.',
+    staticContent: 'The 7th Schedule divides powers into Union List (List I - 100 items), State List (List II - 61 items), and Concurrent List (List III - 52 items). Residuary powers are vested in Parliament under Article 248. The Constitution contains inter-state dispute resolution mechanisms including Inter-State River Water Disputes Tribunals under Article 262 and Inter-State Council under Article 263.',
+    easyExplanation: 'India balances central unity with state powers. When conflicts arise over laws, central law prevails on concurrent subjects. Governors represent the Centre in states, which sometimes causes friction when different parties rule.',
+    advancedAnalysis: 'Contemporary federalism is tested along multiple structural fault lines: (1) Legislative: Centralization via expansive interpretation of Union/Concurrent entries (e.g. farm laws, electricity amendment); (2) Financial: Expansion of non-divisible cesses and surcharges (exceeding 20% of gross tax revenue), off-budget borrowing caps on states under Article 293(3), and delays in GST compensation cess cessations; (3) Administrative: Withholding or indefinite delay of gubernatorial assent to State bills (Article 200), appointment of Governors without state consultation, and misuse of central investigative agencies.',
+    constitutionalBasis: [
+      { article: '245-255', title: 'Legislative Relations', provision: 'Territorial extent, subject-matter division, Parliament\'s power to legislate on State List items in national interest (Art 249, 250, 252, 253).' },
+      { article: '256-263', title: 'Administrative Relations', provision: 'Compliance of State laws, Union directions, delegation of functions, All India Services (Art 312), Inter-State Council (Art 263).' },
+      { article: '262', title: 'Inter-State River Water Disputes', provision: 'Parliament may by law provide for adjudication of disputes relating to waters of inter-state rivers and bar Supreme Court jurisdiction.' },
+      { article: '268-293', title: 'Financial Relations', provision: 'Distribution of taxes, GST Council (Art 279A), Grants-in-Aid (Art 275), State borrowing powers (Art 293).' },
+      { article: '352, 356, 360', title: 'Emergency Provisions', provision: 'National Emergency, President\'s Rule on failure of constitutional machinery, and Financial Emergency.' }
+    ],
+    laws: ['Inter-State River Water Disputes Act 1956', 'States Reorganisation Act 1956 (Zonal Councils)', 'Goods and Services Tax (GST) Acts 2017'],
+    judgments: [
+      { name: 'S.R. Bommai v. Union of India', year: 1994, principle: 'Presidential proclamation under Article 356 is subject to judicial review; floor test in Legislative Assembly is the only valid forum to test majority.', relevance: 'Dramatically curtailed arbitrary imposition of President\'s Rule.' },
+      { name: 'State of Punjab v. Principal Secretary to Governor', year: 2023, principle: 'Governor cannot sit indefinitely on bills passed by State Legislature; if assent is withheld, bill must be returned "as soon as possible" with a message under Article 200.', relevance: 'Checked gubernatorial pocket vetoes on state enactments.' },
+      { name: 'Union of India v. Mohit Minerals (GST Council Ruling)', year: 2022, principle: 'GST Council recommendations are not unexceptionally binding on State Legislatures; Indian federalism is a dialogue between cooperative partners.', relevance: 'Affirmed simultaneous legislative power under Article 246A.' }
+    ],
+    committees: [
+      { name: 'Sarkaria Commission on Centre-State Relations', year: 1988, recommendations: ['Governor should be an eminent person outside state politics.', 'Article 356 to be used only as a measure of last resort (in extremis).', 'Activation of Inter-State Council under Article 263.'] },
+      { name: 'M.M. Punchhi Commission', year: 2010, recommendations: ['Fixed 5-year tenure for Governors; removal by impeachment by State Legislature on lines of President.', 'Doctrine of executive necessity to be strictly constrained.'] }
+    ],
+    reports: [
+      { name: 'Report on Fiscal Federalism', publisher: 'NITI Aayog / 15th Finance Commission', year: 2021, keyFindings: 'Need to rationalize Centrally Sponsored Schemes and contain off-budget fiscal risks of states while ensuring national priorities.' }
+    ],
+    schemes: ['Special Assistance to States for Capital Investment (50-year interest-free loans)'],
+    currentAffairsIds: ['ca-governor-bill-withholding', 'ca-inter-state-water-amendment'],
+    prelimsFacts: [
+      'Under Article 262, Parliament enacted the Inter-State River Water Disputes Act, 1956; Supreme Court and other courts have NO jurisdiction over water disputes referred to a Tribunal.',
+      'Zonal Councils are STATUTORY bodies established under the States Reorganisation Act 1956 (chaired by the Union Home Minister).',
+      'North-Eastern Council is a separate statutory body created under the North-Eastern Council Act, 1971.',
+      'Article 248 vests residuary powers of legislation exclusively in Parliament (unlike USA and Australia where residuary powers belong to states).'
+    ],
+    mainsPointers: [
+      'Evaluate the evolving role of the Governor: from an "elder statesman" to an instrument of partisan central friction.',
+      'Analyze the impact of GST Council and 15th Finance Commission awards on Cooperative Fiscal Federalism.',
+      'Assess why Inter-State Water Disputes Tribunals suffer from protracted delays (Cauvery, Krishna, Sutlej-Yamuna Link) and suggest institutional remedies.'
+    ],
+    examples: [
+      { title: 'Ken-Betwa River Interlinking Project', description: 'Historic tripartite agreement between Union Jal Shakti Ministry, MP, and UP to transfer surplus water from Ken basin to drought-prone Bundelkhand region.', source: 'Ministry of Jal Shakti', upRelevance: true }
+    ],
+    sources: [
+      { title: 'Sarkaria Commission Report on Centre-State Relations', organization: 'Ministry of Home Affairs', url: 'https://interstatecouncil.gov.in', publicationDate: '1988-01-01', lastVerified: '2026-09-20', status: 'official' },
+      { title: 'M.M. Punchhi Commission Report', organization: 'Inter-State Council Secretariat', url: 'https://interstatecouncil.gov.in', publicationDate: '2010-04-01', lastVerified: '2026-09-20', status: 'official' }
+    ],
+    lastVerified: '2026-09-24',
+    claimType: 'ANALYSIS'
+  },
+  {
+    id: 'topic-local-governance-3f-devolution',
+    title: 'Decentralisation and Local Governance: 73rd & 74th Amendments, 3F Devolution, and PESA',
+    category: 'Polity',
+    subtopic: 'Panchayati Raj & Urban Local Bodies',
+    examRelevance: ['UPSC', 'UPPSC', 'State PSC'],
+    examSpecificNotes: {
+      upsc: 'Focus on 3Fs starvation (Functions, Funds, Functionaries), Panchayat Devolution Index by MoPR/NITI Aayog, and PESA Act 1996 in Scheduled Areas.',
+      uppsc: 'Focus on UP Panchayati Raj Act 1947, UP Municipalities Act 1916, UP State Finance Commission, and Gram Panchayat Sachiv cadre.'
+    },
+    summary: 'The third tier of Indian democracy, analyzing constitutional mandates under Part IX and IXA, 11th and 12th Schedules, State Finance Commissions, and structural barriers to effective grassroots autonomy.',
+    staticContent: '73rd and 74th Constitutional Amendment Acts (1992) accorded constitutional status to Panchayati Raj Institutions (PRIs) and Urban Local Bodies (ULBs). Added Part IX (Arts 243 to 243O) and Part IXA (Arts 243P to 243ZG), along with 11th Schedule (29 functional subjects) and 12th Schedule (18 functional subjects). Mandated 33% reservation for women, State Election Commission (Art 243K), and State Finance Commission (Art 243I).',
+    easyExplanation: 'Village Panchayats and City Municipalities bring democracy to citizens\' doorsteps. They manage local roads, sanitation, drinking water, and schools.',
+    advancedAnalysis: 'Despite 30+ years of constitutionalization, local bodies suffer from severe structural "3Fs Starvation": (1) Functions: Incomplete functional devolution by state line departments; (2) Funds: Chronic lack of own-source revenue (own-tax revenue of Panchayats is less than 5% of total revenue); state governments delay or reject State Finance Commission recommendations; (3) Functionaries: Severe staff shortages, dual allegiance of deputed state administrative officers (BDOs, Executive Officers) who undermine elected Sarpanches/Mayors. In Fifth Schedule tribal areas, PESA Act 1996 Gram Sabha powers are regularly bypassed for mining and industrial acquisitions.',
+    constitutionalBasis: [
+      { article: '40', title: 'Organization of Village Panchayats', provision: 'DPSP directive to organize village panchayats as units of self-government.' },
+      { article: '243-243O', title: 'Part IX - The Panchayats', provision: 'Three-tier structure (Gram, Intermediate, District), Gram Sabha, reservations, elections, and 11th Schedule powers.' },
+      { article: '243I & 243Y', title: 'State Finance Commission', provision: 'Constituted every 5 years by Governor to review financial position of local bodies.' },
+      { article: '243K & 243ZA', title: 'State Election Commission', provision: 'Superintendence, direction, and control of local body elections.' },
+      { article: '243ZD & 243ZE', title: 'District & Metropolitan Planning Committees', provision: 'Consolidate plans prepared by Panchayats and Municipalities.' }
+    ],
+    laws: ['Provisions of the Panchayats (Extension to the Scheduled Areas) Act, 1996 (PESA)', 'State Panchayati Raj Acts'],
+    judgments: [
+      { name: 'K. Krishna Murthy v. Union of India', year: 2010, principle: 'Reservation for OBCs in local bodies is constitutionally permissible subject to the "Triple Test" (empirical commission, proportionate quota, 50% aggregate cap).', relevance: 'Governs OBC reservation criteria in Panchayat/Municipal elections.' },
+      { name: 'Suresh Mahajan v. State of MP', year: 2022, principle: 'No election to local bodies can be deferred beyond the 5-year constitutional term; State Election Commission must conduct elections promptly upon expiry of tenure.', relevance: 'Enforces strict adherence to 5-year constitutional term under Art 243E.' }
+    ],
+    committees: [
+      { name: 'Balwant Rai Mehta Committee', year: 1957, recommendations: ['Pioneered democratic decentralization and recommended three-tier Panchayati Raj system.'] },
+      { name: 'Ashok Mehta Committee', year: 1977, recommendations: ['Recommended 2-tier system (Zila Parishad and Mandal Panchayat) with political party participation.'] },
+      { name: 'L.M. Singhvi Committee', year: 1986, recommendations: ['Recommended according constitutional recognition and protection to Panchayati Raj institutions.'] }
+    ],
+    reports: [
+      { name: 'Panchayat Devolution Index Report', publisher: 'Ministry of Panchayati Raj / NITI Aayog', year: 2023, keyFindings: 'States like Kerala, Karnataka, and Maharashtra lead in functional and fiscal devolution; northern states lag in own-source tax collection.' }
+    ],
+    schemes: ['e-Gram Swaraj portal', 'SVAMITVA Scheme (drone surveying of inhabited rural abadi lands)'],
+    currentAffairsIds: ['ca-svamitva-property-cards', 'ca-pesa-state-rules'],
+    prelimsFacts: [
+      'Rajasthan (Nagaur district) was the first state to establish Panchayati Raj on October 2, 1959, followed by Andhra Pradesh.',
+      '73rd Amendment is NOT applicable to Nagaland, Meghalaya, and Mizoram, and tribal areas in Assam, Meghalaya, Tripura, Mizoram, and hill areas of Manipur.',
+      'PESA Act, 1996 was enacted on the recommendations of the Dilip Singh Bhuria Committee.',
+      '11th Schedule has 29 items; 12th Schedule has 18 items.'
+    ],
+    mainsPointers: [
+      '"Panchayats in India have transformed political democracy but failed to become viable institutions of local economic self-governance." Critically evaluate.',
+      'Analyze the phenomenon of "Sarpanch Pati" (proxy rule by husbands of elected women representatives) and evaluate policy interventions to foster substantive female leadership.',
+      'Examine the implementation bottlenecks of the PESA Act in Fifth Schedule areas. Why has Gram Sabha consent been reduced to a bureaucratic formality?'
+    ],
+    examples: [
+      { title: 'Hiware Bazar Gram Panchayat (Maharashtra)', description: 'Popatrao Pawar transformed a drought-prone village into a prosperous model community through watershed management, prohibition, and participatory Gram Sabha budgeting.', source: 'National Water Mission Case Studies' },
+      { title: 'UP SVAMITVA "Gharauni" Property Cards', description: 'Over 60 lakh rural households in Uttar Pradesh issued digital property title cards following drone-based land parcel mapping, unlocking bank credit access.', source: 'Revenue Department, Govt of UP', upRelevance: true }
+    ],
+    sources: [
+      { title: 'Report of the 15th Finance Commission: Local Governments', organization: 'Finance Commission of India', url: 'https://fincomindia.nic.in', publicationDate: '2021-02-01', lastVerified: '2026-09-20', status: 'official' },
+      { title: 'Annual Report 2023-24', organization: 'Ministry of Panchayati Raj', url: 'https://panchayat.gov.in', publicationDate: '2024-04-15', lastVerified: '2026-09-22', status: 'official' }
+    ],
+    lastVerified: '2026-09-24',
+    claimType: 'ANALYSIS'
+  },
+  {
+    id: 'topic-dispute-redressal-tribunals-pil',
+    title: 'Dispute Redressal Mechanisms: RTI, Public Interest Litigation (PIL), and Tribunals',
+    category: 'Polity',
+    subtopic: 'Judicial Institutions & Alternative Redressal',
+    examRelevance: ['UPSC', 'UPPSC', 'State PSC'],
+    examSpecificNotes: {
+      upsc: 'Focus on Articles 323A & 323B, Tribunal Reforms Act 2021, L. Chandra Kumar ruling, and limits of PIL (preventing frivolous litigation).',
+      uppsc: 'Focus on UP Public Services Tribunal, UP Real Estate Regulatory Authority (UP RERA), and Lok Adalats.'
+    },
+    summary: 'Analysis of non-traditional dispute resolution and adjudicatory mechanisms designed to relieve judicial congestion, expand access to justice, and enforce administrative accountability.',
+    staticContent: '42nd Constitutional Amendment (1976) inserted Part XIVA containing Article 323A (Administrative Tribunals for public service matters) and Article 323B (Tribunals for other matters such as taxation, land reforms, foreign exchange). Public Interest Litigation (PIL) developed as judge-led innovation relaxing classical rules of locus standi.',
+    easyExplanation: 'Courts are overloaded with millions of pending cases. Tribunals, PILs, and RTI allow faster decisions, expert technical judging, and help citizens demand justice for public issues without expensive lawyer fees.',
+    advancedAnalysis: 'The Tribunalisation of Justice in India reflects a chronic constitutional tension: While created to bring technical domain expertise and speed, tribunals have frequently suffered from: (1) Executive encroachment on judicial independence through short tenures (4 years), lack of financial autonomy, and dominance of bureaucrats on search-cum-selection committees (repeatedly struck down in Madras Bar Association judgments); (2) Added appellate tier: Post-L. Chandra Kumar (1997), tribunal orders are appealable before the Division Bench of High Courts under Article 226/227, defeating the purpose of speedy single-tier disposal; (3) Pendency and vacancy crises. Similarly, PIL has faced criticism for judicial populism and frivolous litigation.',
+    constitutionalBasis: [
+      { article: '323A', title: 'Administrative Tribunals', provision: 'Parliament may by law provide for adjudication of disputes relating to recruitment and conditions of service of public servants.' },
+      { article: '323B', title: 'Tribunals for other matters', provision: 'Parliament and State Legislatures may establish tribunals for tax, foreign exchange, industrial disputes, land reforms, rent.' },
+      { article: '32 & 226', title: 'Writ Jurisdictions', provision: 'Remedies for enforcement of Fundamental Rights and legal rights, giving birth to PIL jurisprudence.' },
+      { article: '39A', title: 'Equal Justice and Free Legal Aid', provision: 'DPSP guiding Legal Services Authorities Act 1987 and Lok Adalats.' }
+    ],
+    laws: ['Administrative Tribunals Act 1985', 'Tribunals Reforms Act 2021', 'Legal Services Authorities Act 1987 (Lok Adalats)'],
+    judgments: [
+      { name: 'L. Chandra Kumar v. Union of India', year: 1997, principle: 'Power of judicial review under Articles 226/227 (High Courts) and 32 (Supreme Court) is an integral part of the Basic Structure. Tribunals are subordinate to High Courts.', relevance: 'Held that tribunal decisions are subject to scrutiny by Division Benches of High Courts.' },
+      { name: 'Madras Bar Association v. Union of India (Series: 2010, 2014, 2020, 2021)', year: 2021, principle: 'Struck down provisions fixing 4-year tenures, minimum age of 50 years, and executive dominance on selection committees as direct assaults on judicial independence.', relevance: 'Reiterated need for a National Tribunals Commission (NTC).' },
+      { name: 'S.P. Gupta v. Union of India (Judges Transfer Case)', year: 1981, principle: 'Relaxed the traditional rule of locus standi; any public-spirited citizen or NGO can approach the court on behalf of disadvantaged persons.', relevance: 'Pioneered Public Interest Litigation in India.' }
+    ],
+    committees: [
+      { name: 'Swaran Singh Committee', year: 1976, recommendations: ['Recommended insertion of Part XIVA (Articles 323A and 323B) to establish specialized tribunals.'] },
+      { name: 'Justice V.S. Malimath Committee on Tribunals', year: 1990, recommendations: ['Proposed comprehensive restructuring and oversight of central and state tribunals.'] }
+    ],
+    reports: [
+      { name: 'Law Commission of India Report No. 272', publisher: 'Law Commission of India', year: 2017, keyFindings: 'Recommended uniform terms and conditions of service for tribunal members and establishment of a statutory National Tribunals Commission.' }
+    ],
+    schemes: ['National Legal Services Authority (NALSA) Free Legal Aid', 'e-Lok Adalats'],
+    currentAffairsIds: ['ca-tribunal-reforms-act-controversy', 'ca-pil-guidelines-review'],
+    prelimsFacts: [
+      'Article 323A can be established ONLY by Parliament, whereas Article 323B tribunals can be established by BOTH Parliament and State Legislatures.',
+      'Under Article 323A, there is no hierarchy of tribunals (only one Central and one State tribunal for each state/joint), whereas under Article 323B a hierarchy can be created.',
+      'Lok Adalat awards have the statutory status of a civil court decree under Legal Services Authorities Act 1987, and NO APPEAL lies against an award of Lok Adalat.'
+    ],
+    mainsPointers: [
+      'Critically examine whether the tribunalisation of justice in India has delivered on its promise of speedy, specialized dispute resolution or merely created "bureaucratic post-retirement rehabilitation centres".',
+      'Assess the case for creating an independent, statutory "National Tribunals Commission" to oversee tribunal appointments, infrastructure, and budgeting.',
+      'Discuss the evolution of PIL from a tool of public interest to private interest litigation and evaluate measures to curb judicial overreach.'
+    ],
+    examples: [
+      { title: 'UP Real Estate Regulatory Authority (UP RERA)', description: 'Adjudicated over 50,000 homebuyer-builder disputes in Noida, Greater Noida, and Lucknow, recovering hundreds of crores in recovery certificates.', source: 'UP RERA Annual Performance Review 2023', upRelevance: true }
+    ],
+    sources: [
+      { title: 'Report No. 272 on Assessment of Statutory Framework of Tribunals', organization: 'Law Commission of India', url: 'https://lawcommissionofindia.nic.in', publicationDate: '2017-10-27', lastVerified: '2026-09-20', status: 'official' }
+    ],
+    lastVerified: '2026-09-24',
+    claimType: 'ANALYSIS'
   }
 ];

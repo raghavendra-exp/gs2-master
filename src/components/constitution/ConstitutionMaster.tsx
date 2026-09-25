@@ -20,15 +20,20 @@ import {
   CONSTITUTIONAL_AMENDMENTS,
   BASIC_STRUCTURE_TIMELINE,
   BASIC_STRUCTURE_FEATURES,
-  COMPARATIVE_CONSTITUTIONS
+  COMPARATIVE_CONSTITUTIONS,
+  HISTORICAL_ACTS_DATA,
+  CONSTITUENT_ASSEMBLY_DATA,
+  SALIENT_FEATURES_DATA
 } from '../../data';
 import { useUserData } from '../../context/UserDataContext';
 import { ConstitutionArticle } from '../../types';
 
 export const ConstitutionMaster: React.FC = () => {
-  const [activeSubTab, setActiveSubTab] = useState<'articles' | 'map' | 'amendments' | 'basicStructure' | 'comparative'>('articles');
+  const [activeSubTab, setActiveSubTab] = useState<'historical' | 'features' | 'articles' | 'map' | 'amendments' | 'basicStructure' | 'comparative'>('historical');
   const [articleSearch, setArticleSearch] = useState('');
   const [selectedArticle, setSelectedArticle] = useState<ConstitutionArticle>(CONSTITUTION_ARTICLES[0]);
+  const [actSearch, setActSearch] = useState('');
+  const [selectedAct, setSelectedAct] = useState(HISTORICAL_ACTS_DATA[0]);
   const [amendmentSearch, setAmendmentSearch] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(COMPARATIVE_CONSTITUTIONS[0]);
 
@@ -68,6 +73,8 @@ export const ConstitutionMaster: React.FC = () => {
         {/* Sub-Navigation Buttons */}
         <div className="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-xl">
           {[
+            { id: 'historical', label: 'Historical Evolution (1773-1947)' },
+            { id: 'features', label: 'Salient Features' },
             { id: 'articles', label: 'Article Explorer' },
             { id: 'map', label: 'Constitution Map' },
             { id: 'amendments', label: 'Amendment Tracker' },
@@ -88,6 +95,249 @@ export const ConstitutionMaster: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* 0A. HISTORICAL UNDERPINNINGS & EVOLUTION (1773-1947) */}
+      {activeSubTab === 'historical' && (
+        <div className="space-y-8 animate-fade-in">
+          <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+              <Calendar className="w-4 h-4" />
+              Constitutional Genesis
+            </div>
+            <h2 className="text-xl font-black mt-1">From Regulating Act (1773) to Indian Independence (1947)</h2>
+            <p className="text-xs text-blue-100 mt-2 max-w-3xl leading-relaxed">
+              Trace the administrative, legislative, and judicial evolution of the Indian Constitution through colonial enactments, the Constituent Assembly debates, and the philosophical bedrock of Nehru's Objective Resolution.
+            </p>
+          </div>
+
+          {/* Act Explorer Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Column: Acts Selector */}
+            <div className="lg:col-span-4 bg-white border border-slate-200 rounded-2xl p-4 space-y-3 shadow-xs max-h-[80vh] flex flex-col">
+              <div className="relative">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                <input
+                  type="text"
+                  value={actSearch}
+                  onChange={e => setActSearch(e.target.value)}
+                  placeholder="Search Act (e.g. 1935, 1919, 1858)..."
+                  className="w-full bg-slate-50 text-slate-900 placeholder:text-slate-400 pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-hidden focus:ring-1 focus:ring-blue-900"
+                />
+              </div>
+
+              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-1">
+                Acts Timeline ({HISTORICAL_ACTS_DATA.length})
+              </div>
+
+              <div className="overflow-y-auto space-y-2 flex-1 pr-1">
+                {HISTORICAL_ACTS_DATA.filter(act => 
+                  act.actName.toLowerCase().includes(actSearch.toLowerCase()) || 
+                  act.year.toString().includes(actSearch)
+                ).map(act => {
+                  const isSelected = selectedAct.id === act.id;
+                  return (
+                    <button
+                      key={act.id}
+                      onClick={() => setSelectedAct(act)}
+                      className={`w-full text-left p-3 rounded-xl border transition-all ${
+                        isSelected
+                          ? 'border-blue-900 bg-blue-50/50 shadow-xs'
+                          : 'border-slate-100 hover:border-slate-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-black ${
+                          isSelected ? 'bg-blue-900 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {act.year}
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-semibold">
+                          British Enactment
+                        </span>
+                      </div>
+                      <div className="font-bold text-xs text-slate-900 mt-1 line-clamp-1">
+                        {act.actName}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Column: Selected Act Detailed Dossier */}
+            <div className="lg:col-span-8 bg-white border border-slate-200 rounded-2xl p-6 space-y-6 shadow-xs">
+              <div className="border-b border-slate-100 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono font-black px-2.5 py-0.5 rounded-lg bg-blue-100 text-blue-900">
+                      YEAR {selectedAct.year}
+                    </span>
+                    <span className="text-xs text-slate-500 font-medium">Historical Underpinning</span>
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mt-1">{selectedAct.actName}</h3>
+                </div>
+                <div className="text-[11px] text-slate-500 italic bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100">
+                  Source: {selectedAct.officialSource}
+                </div>
+              </div>
+
+              {/* Context */}
+              <div className="space-y-1.5">
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">Historical Context</h4>
+                <p className="text-xs text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  {selectedAct.historicalContext}
+                </p>
+              </div>
+
+              {/* Key Provisions */}
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  Salient Statutory Provisions
+                </h4>
+                <div className="space-y-1.5">
+                  {selectedAct.keyProvisions.map((prov, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 bg-slate-50/70 p-2.5 rounded-lg border border-slate-100">
+                      <span className="font-mono font-bold text-blue-900 shrink-0">{idx + 1}.</span>
+                      <span className="leading-relaxed">{prov}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Constitutional Legacy */}
+              <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-1">
+                <span className="font-bold text-blue-900 text-xs flex items-center gap-1.5">
+                  <Layers className="w-4 h-4 text-blue-700" />
+                  Constitutional Legacy in Present Indian Governance
+                </span>
+                <p className="text-xs text-blue-950 leading-relaxed">
+                  {selectedAct.constitutionalLegacy}
+                </p>
+              </div>
+
+              {/* Prelims Trap & Mains Pointers */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 space-y-2">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900 uppercase">
+                    <ShieldCheck className="w-4 h-4 text-amber-600" />
+                    Prelims Trap Angle
+                  </div>
+                  <p className="text-xs text-amber-950 leading-relaxed">
+                    {selectedAct.prelimsTrap}
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-slate-900 text-slate-200 space-y-2">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase">
+                    <FileText className="w-4 h-4" />
+                    Mains Analytical Pointers
+                  </div>
+                  <ul className="text-xs space-y-1 text-slate-300 list-disc list-inside">
+                    {selectedAct.mainsPointers.map((mp, i) => (
+                      <li key={i} className="leading-relaxed">{mp}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Constituent Assembly Timeline */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div>
+                <h3 className="text-base font-black text-slate-900">
+                  Constituent Assembly: The Making of the Sovereign Republic
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Key milestones, Objective Resolution, and drafting committee proceedings (1946–1950)
+                </p>
+              </div>
+              <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                2 Years, 11 Months, 18 Days
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+              {CONSTITUENT_ASSEMBLY_DATA.map((milestone, idx) => (
+                <div key={idx} className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-900 text-white">
+                      {milestone.dateOrPeriod}
+                    </span>
+                    <h4 className="font-bold text-xs text-slate-900 mt-2">{milestone.event}</h4>
+                    <p className="text-xs text-slate-600 mt-1 leading-relaxed">{milestone.significance}</p>
+                  </div>
+                  <div className="pt-2 border-t border-slate-200/60 text-[11px] text-slate-500">
+                    <span className="font-semibold text-slate-700">Key Architects: </span>
+                    {milestone.keyPersonalities.join(', ')}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 0B. SALIENT FEATURES OF THE INDIAN CONSTITUTION */}
+      {activeSubTab === 'features' && (
+        <div className="space-y-6 animate-fade-in">
+          <div className="bg-gradient-to-r from-slate-900 to-blue-950 text-white rounded-2xl p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
+              <Scale className="w-4 h-4" />
+              Constitutional Architecture
+            </div>
+            <h2 className="text-xl font-black mt-1">Salient Features of the Indian Constitutional Scheme</h2>
+            <p className="text-xs text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              In-depth comparative analysis of the unique synthesis of rigidity and flexibility, parliamentary sovereignty with judicial supremacy, and positive secularism.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {SALIENT_FEATURES_DATA.map(feature => (
+              <div key={feature.id} className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-xs flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                    <h3 className="font-bold text-sm text-slate-900">{feature.featureName}</h3>
+                    <div className="flex gap-1">
+                      {feature.constitutionalArticles.map((art, i) => (
+                        <span key={i} className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 text-blue-900 font-bold border border-blue-200">
+                          {art}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <span className="text-[11px] font-bold text-blue-900 uppercase">Indian Synthesis</span>
+                    <p className="text-xs text-slate-700 leading-relaxed bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                      {feature.indianModel}
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <span className="text-[11px] font-bold text-amber-800 uppercase">Comparison with Western Systems</span>
+                    <p className="text-xs text-slate-600 leading-relaxed bg-amber-50/40 p-2.5 rounded-lg border border-amber-100">
+                      {feature.comparisonWithWesternModels}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 space-y-2">
+                  <div className="text-[11px] text-slate-500">
+                    <span className="font-bold text-slate-700">Landmark Precedents: </span>
+                    {feature.landmarkJudgments.join(' • ')}
+                  </div>
+                  <div className="text-[11px] text-slate-600 italic bg-slate-50 p-2 rounded border border-slate-100">
+                    {feature.criticalAnalysis}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 1. ARTICLE EXPLORER */}
       {activeSubTab === 'articles' && (

@@ -12,17 +12,29 @@ import {
   Layers,
   HelpCircle,
   Activity,
-  Users
+  Users,
+  Search,
+  Vote,
+  Building2,
+  Briefcase,
+  AlertTriangle
 } from 'lucide-react';
-import { POLITY_TOPICS, INSTITUTIONAL_BODIES } from '../../data';
+import {
+  POLITY_TOPICS,
+  INSTITUTIONAL_BODIES,
+  RPA_PROVISIONS_DATA,
+  PRESSURE_GROUPS_DATA,
+  EXECUTIVE_STRUCTURE_DATA
+} from '../../data';
 import { useUserData } from '../../context/UserDataContext';
 import { useExamMode } from '../../context/ExamModeContext';
 import { SourceBadge } from '../common/SourceBadge';
 
 export const PolityExplorer: React.FC = () => {
-  const [activeSubTab, setActiveSubTab] = useState<'topics' | 'federalism' | 'separation' | 'parliamentFlow' | 'bodies' | 'diagramLab'>('topics');
+  const [activeSubTab, setActiveSubTab] = useState<'topics' | 'federalism' | 'separation' | 'parliamentFlow' | 'bodies' | 'rpa' | 'pressureGroups' | 'executive' | 'diagramLab'>('topics');
   const [selectedTopic, setSelectedTopic] = useState(POLITY_TOPICS[0]);
   const [selectedBodyType, setSelectedBodyType] = useState<string>('All');
+  const [bodySearch, setBodySearch] = useState<string>('');
   const [flowStep, setFlowStep] = useState<number>(1);
   const [trackerTab, setTrackerTab] = useState<'functions' | 'funds' | 'functionaries'>('funds');
 
@@ -30,9 +42,12 @@ export const PolityExplorer: React.FC = () => {
   const { examMode } = useExamMode();
 
   // Filtered Bodies
-  const filteredBodies = INSTITUTIONAL_BODIES.filter(
-    b => selectedBodyType === 'All' || b.type === selectedBodyType
-  );
+  const filteredBodies = INSTITUTIONAL_BODIES.filter(b => {
+    const matchesType = selectedBodyType === 'All' || b.type === selectedBodyType;
+    const matchesSearch = b.name.toLowerCase().includes(bodySearch.toLowerCase()) ||
+                          b.articleOrAct.toLowerCase().includes(bodySearch.toLowerCase());
+    return matchesType && matchesSearch;
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
@@ -52,10 +67,13 @@ export const PolityExplorer: React.FC = () => {
         <div className="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-xl">
           {[
             { id: 'topics', label: 'Polity Topics' },
+            { id: 'bodies', label: 'Bodies Directory (40+)' },
+            { id: 'rpa', label: 'Elections & RPA' },
+            { id: 'pressureGroups', label: 'Pressure Groups' },
+            { id: 'executive', label: 'Executive & Ministries' },
             { id: 'federalism', label: 'Federalism & 3F' },
             { id: 'separation', label: 'Separation of Powers' },
             { id: 'parliamentFlow', label: 'Legislative Flow' },
-            { id: 'bodies', label: 'Bodies Directory' },
             { id: 'diagramLab', label: 'Diagram Lab' }
           ].map(tab => (
             <button
@@ -539,17 +557,22 @@ export const PolityExplorer: React.FC = () => {
       {/* 5. BODIES DIRECTORY */}
       {activeSubTab === 'bodies' && (
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Institutional Bodies Directory</h2>
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-bold text-slate-900">Institutional Bodies Directory</h2>
+                <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-blue-100 text-blue-900">
+                  {filteredBodies.length} of {INSTITUTIONAL_BODIES.length} Bodies
+                </span>
+              </div>
               <p className="text-xs text-slate-500 mt-1">
-                Comparative analysis of Constitutional, Statutory, Regulatory, and Quasi-Judicial bodies.
+                Comparative analysis of Constitutional, Statutory, Regulatory, Quasi-Judicial, and Executive bodies.
               </p>
             </div>
 
             {/* Filter Pills */}
             <div className="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-xl">
-              {['All', 'Constitutional', 'Statutory', 'Regulatory', 'Quasi-Judicial'].map(type => (
+              {['All', 'Constitutional', 'Statutory', 'Regulatory', 'Quasi-Judicial', 'Executive / Advisory'].map(type => (
                 <button
                   key={type}
                   onClick={() => setSelectedBodyType(type)}
@@ -563,6 +586,26 @@ export const PolityExplorer: React.FC = () => {
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Search Box */}
+          <div className="relative">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search by body name, Article (e.g. Art 324), or statute (e.g. RTI Act, Competition Act)..."
+              value={bodySearch}
+              onChange={e => setBodySearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
+            />
+            {bodySearch && (
+              <button
+                onClick={() => setBodySearch('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600 font-bold"
+              >
+                Clear
+              </button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -580,7 +623,9 @@ export const PolityExplorer: React.FC = () => {
                         ? 'bg-purple-100 text-purple-900'
                         : body.type === 'Regulatory'
                         ? 'bg-emerald-100 text-emerald-900'
-                        : 'bg-amber-100 text-amber-900'
+                        : body.type === 'Quasi-Judicial'
+                        ? 'bg-amber-100 text-amber-900'
+                        : 'bg-rose-100 text-rose-900'
                     }`}
                   >
                     {body.type} Body
@@ -614,6 +659,245 @@ export const PolityExplorer: React.FC = () => {
                     🏛 <strong>UP Context:</strong> {body.upRelevance}
                   </div>
                 )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 6. ELECTIONS & RPA */}
+      {activeSubTab === 'rpa' && (
+        <div className="space-y-6">
+          <div className="border-b border-slate-200 pb-4">
+            <div className="flex items-center gap-2">
+              <Vote className="w-5 h-5 text-blue-900" />
+              <h2 className="text-lg font-bold text-slate-900">
+                Representation of the People Acts (1950 vs 1951) & Electoral Reforms
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              Constitutional architecture (Articles 324-329), statutory provisions, criminalisation of politics (Section 8), electoral finance (ADR 2024), and One Nation One Election.
+            </p>
+          </div>
+
+          {/* RPA 1950 vs RPA 1951 Comparison Header */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-blue-50/60 border border-blue-200 p-4 rounded-2xl space-y-2 text-xs">
+              <div className="font-bold text-blue-950 text-sm flex items-center gap-1.5">
+                <FileText className="w-4 h-4 text-blue-800" />
+                Representation of the People Act, 1950 (Pre-Election Machinery)
+              </div>
+              <p className="text-slate-700 leading-relaxed">
+                Deals with the structural setup: Allocation of seats in Parliament and State Assemblies, delimitation of constituencies, qualifications of voters (Art 326), and preparation & revision of electoral rolls.
+              </p>
+              <div className="text-[11px] font-medium text-blue-900">
+                Key Officers: Chief Electoral Officer (CEO), District Election Officer (DEO), Electoral Registration Officer (ERO).
+              </div>
+            </div>
+
+            <div className="bg-purple-50/60 border border-purple-200 p-4 rounded-2xl space-y-2 text-xs">
+              <div className="font-bold text-purple-950 text-sm flex items-center gap-1.5">
+                <Vote className="w-4 h-4 text-purple-800" />
+                Representation of the People Act, 1951 (Actual Conduct & Standards)
+              </div>
+              <p className="text-slate-700 leading-relaxed">
+                Deals with the execution: Actual conduct of elections, qualifications/disqualifications of MPs/MLAs (Sec 8), corrupt practices & electoral offences (Sec 123), political party registration (Sec 29A), and election petitions.
+              </p>
+              <div className="text-[11px] font-medium text-purple-900">
+                Key Officers: Returning Officer (RO), Presiding Officer, Polling Observers (General, Expenditure, Police).
+              </div>
+            </div>
+          </div>
+
+          {/* High-Level Committee on Simultaneous Elections Box */}
+          <div className="bg-amber-50 border border-amber-200 p-5 rounded-2xl space-y-2 text-xs">
+            <div className="font-bold text-amber-950 text-sm flex items-center gap-1.5">
+              <AlertTriangle className="w-4 h-4 text-amber-800" />
+              High-Level Committee on Simultaneous Elections (Ram Nath Kovind Committee, 2024)
+            </div>
+            <p className="text-slate-800 leading-relaxed">
+              Recommended a two-step transition towards "One Nation, One Election":
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-slate-700">
+              <div className="bg-white p-3 rounded-xl border border-amber-200">
+                <strong>Step 1: Simultaneous Lok Sabha & Vidhan Sabhas</strong>
+                <p className="text-slate-600 mt-1">Through Article 82A; requires Constitutional amendment by special majority under Art 368(2) without requiring state assembly ratification.</p>
+              </div>
+              <div className="bg-white p-3 rounded-xl border border-amber-200">
+                <strong>Step 2: Synchronizing Municipalities & Panchayats</strong>
+                <p className="text-slate-600 mt-1">Local body polls to be held within 100 days of national elections; requires Art 325 amendment with ratification by at least 50% of States.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Granular RPA Provisions Cards */}
+          <div className="space-y-4">
+            <h3 className="font-bold text-slate-900 text-sm uppercase tracking-wider">
+              Core Statutory Sections & Constitutional Jurisprudence
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {RPA_PROVISIONS_DATA.map(prov => (
+                <div key={prov.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-3 text-xs">
+                  <div className="flex items-center justify-between">
+                    <span className={`px-2 py-0.5 rounded font-bold ${
+                      prov.act === 'RPA 1950' ? 'bg-blue-100 text-blue-900' : 'bg-purple-100 text-purple-900'
+                    }`}>
+                      {prov.act} • {prov.section}
+                    </span>
+                  </div>
+                  <h4 className="font-bold text-slate-900 text-sm">{prov.title}</h4>
+                  <p className="text-slate-600 leading-relaxed">{prov.provisionSummary}</p>
+                  
+                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 space-y-1">
+                    <div className="font-bold text-slate-800">Constitutional Significance:</div>
+                    <div className="text-slate-600">{prov.significance}</div>
+                  </div>
+
+                  <div className="bg-emerald-50/70 p-3 rounded-xl border border-emerald-200 space-y-1">
+                    <div className="font-bold text-emerald-950">Landmark Judgments:</div>
+                    <ul className="space-y-1 text-slate-700">
+                      {prov.landmarkJudgments.map((j, i) => (
+                        <li key={i} className="flex items-start gap-1">
+                          <span className="text-emerald-800 font-bold">•</span>
+                          <span>{j}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bg-amber-50/70 p-3 rounded-xl border border-amber-200 text-slate-700">
+                    <span className="font-bold text-amber-950">Reform Debate: </span>
+                    {prov.reformsDebate}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 7. PRESSURE GROUPS */}
+      {activeSubTab === 'pressureGroups' && (
+        <div className="space-y-6">
+          <div className="border-b border-slate-200 pb-4">
+            <div className="flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-blue-900" />
+              <h2 className="text-lg font-bold text-slate-900">
+                Pressure Groups & Informal Associations in Indian Polity
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              Analysis of interest aggregation, policy intervention techniques, and their role in deepening or stalling democratic governance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {PRESSURE_GROUPS_DATA.map(group => (
+              <div key={group.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-3 text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-900" />
+                  <h3 className="font-bold text-slate-900 text-sm">{group.category}</h3>
+                </div>
+
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 space-y-1">
+                  <div className="font-bold text-slate-800">Prominent Organizations:</div>
+                  <ul className="space-y-0.5 text-slate-600">
+                    {group.prominentExamples.map((ex, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-blue-900 font-bold">•</span>
+                        <span>{ex}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="font-bold text-slate-800">Techniques & Mechanisms of Influence:</div>
+                  <ul className="space-y-0.5 text-slate-600">
+                    {group.roleAndTechniques.map((tech, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-slate-400 font-bold">›</span>
+                        <span>{tech}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-3 bg-blue-50/70 border border-blue-200 rounded-xl text-slate-700">
+                  <span className="font-bold text-blue-950">Democratic Significance: </span>
+                  {group.significanceInPolity}
+                </div>
+
+                <div className="p-3 bg-rose-50/70 border border-rose-200 rounded-xl space-y-1 text-slate-700">
+                  <div className="font-bold text-rose-950">Shortcomings & Governance Criticisms:</div>
+                  <ul className="space-y-0.5">
+                    {group.criticismsAndShortcomings.map((crit, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-rose-800 font-bold">•</span>
+                        <span>{crit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 8. EXECUTIVE & MINISTRIES */}
+      {activeSubTab === 'executive' && (
+        <div className="space-y-6">
+          <div className="border-b border-slate-200 pb-4">
+            <div className="flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-blue-900" />
+              <h2 className="text-lg font-bold text-slate-900">
+                Structure, Organization & Functioning of the Executive
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              Union Cabinet, Cabinet Secretariat vs PMO, Cabinet Committees, State Executive dynamics, and the Office of Profit jurisprudence.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {EXECUTIVE_STRUCTURE_DATA.map(item => (
+              <div key={item.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-3 text-xs">
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="font-bold text-slate-900 text-sm">{item.organ}</h3>
+                </div>
+                <div className="text-[11px] font-mono text-blue-900 bg-blue-50 px-2.5 py-1 rounded-lg">
+                  {item.constitutionalBasis}
+                </div>
+
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 space-y-1">
+                  <div className="font-bold text-slate-800">Composition & Hierarchy:</div>
+                  <p className="text-slate-600 leading-relaxed">{item.compositionAndStructure}</p>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="font-bold text-slate-800">Powers & Strategic Roles:</div>
+                  <ul className="space-y-0.5 text-slate-600">
+                    {item.powersAndRole.map((pr, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-blue-900 font-bold">•</span>
+                        <span>{pr}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-xl space-y-1 text-slate-700">
+                  <div className="font-bold text-amber-950">Frictions, Reforms & Case Laws:</div>
+                  <ul className="space-y-0.5">
+                    {item.frictionsAndReforms.map((fr, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-amber-800 font-bold">•</span>
+                        <span>{fr}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
