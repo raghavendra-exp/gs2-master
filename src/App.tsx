@@ -18,11 +18,13 @@ import { PYQAnalysisEngine } from './components/pyq/PYQAnalysisEngine';
 import { RevisionHub } from './components/revision/RevisionHub';
 import { ResourceLibrary } from './components/library/ResourceLibrary';
 import { ContentUpdateCentre } from './components/updateCentre/ContentUpdateCentre';
+import { CopyrightModal } from './components/common/CopyrightModal';
 
 export function AppContent() {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [activeSubMode, setActiveSubMode] = useState<string | undefined>(undefined);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isCopyrightOpen, setIsCopyrightOpen] = useState<boolean>(false);
 
   // Keyboard shortcut Ctrl+K / Cmd+K for global search
   useEffect(() => {
@@ -105,7 +107,16 @@ export function AppContent() {
       />
 
       {/* Footer */}
-      <Footer onNavigate={handleNavigate} />
+      <Footer
+        onNavigate={handleNavigate}
+        onOpenCopyright={() => setIsCopyrightOpen(true)}
+      />
+
+      {/* Copyright Certificate & Legal Disclosures Modal */}
+      <CopyrightModal
+        isOpen={isCopyrightOpen}
+        onClose={() => setIsCopyrightOpen(false)}
+      />
     </div>
   );
 }

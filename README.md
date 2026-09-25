@@ -149,3 +149,22 @@ All substantive constitutional articles, judicial rulings, committee reports, sc
 - Ministry of External Affairs (MEA) Official Briefs
 - Second Administrative Reforms Commission (2nd ARC)
 - Press Information Bureau (PIB)
+
+---
+
+## 📜 Intellectual Property, Licensing & Copyright Certificate
+
+### Official Copyright Certificate
+- **Registration Identifier:** `GS2-MSTR-IND-2026-REG01`
+- **Jurisdiction:** Republic of India & Berne Convention
+- **Author & Maintainer:** Raghavendra ([@raghavendra-exp](https://github.com/raghavendra-exp))
+- **Certificate Documentation:** [`COPYRIGHT_CERTIFICATE.md`](./COPYRIGHT_CERTIFICATE.md)
+
+### Dual-License Architecture
+- **Software Code:** Licensed under the **[MIT License](./LICENSE)** (permissive for inspection, academic research, and non-commercial forks).
+- **Educational Frameworks & Analytics:** Licensed under **[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)**.
+
+### Statutory Exemptions (Indian Copyright Act, 1957)
+- **Section 52(1)(q):** Reproduction of constitutional articles, statutory acts, parliamentary committee reports, and judicial judgments (Supreme Court & High Courts) is exempted from copyright infringement.
+- **Section 52(1)(a) & 52(1)(h):** UPSC/UPPSC Previous Years' Questions (PYQs) are reproduced under educational fair dealing exclusively for non-commercial student study, critique, and answer evaluation.
+
