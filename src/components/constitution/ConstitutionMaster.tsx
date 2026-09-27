@@ -13,7 +13,10 @@ import {
   FileText,
   ExternalLink,
   ChevronRight,
-  Info
+  Info,
+  Download,
+  Sparkles,
+  BookMarked
 } from 'lucide-react';
 import {
   CONSTITUTION_ARTICLES,
@@ -23,13 +26,14 @@ import {
   COMPARATIVE_CONSTITUTIONS,
   HISTORICAL_ACTS_DATA,
   CONSTITUENT_ASSEMBLY_DATA,
-  SALIENT_FEATURES_DATA
+  SALIENT_FEATURES_DATA,
+  BOOKS_AND_RESOURCES
 } from '../../data';
 import { useUserData } from '../../context/UserDataContext';
 import { ConstitutionArticle } from '../../types';
 
 export const ConstitutionMaster: React.FC = () => {
-  const [activeSubTab, setActiveSubTab] = useState<'historical' | 'features' | 'articles' | 'map' | 'amendments' | 'basicStructure' | 'comparative'>('historical');
+  const [activeSubTab, setActiveSubTab] = useState<'historical' | 'features' | 'articles' | 'map' | 'amendments' | 'basicStructure' | 'comparative' | 'books'>('historical');
   const [articleSearch, setArticleSearch] = useState('');
   const [selectedArticle, setSelectedArticle] = useState<ConstitutionArticle>(CONSTITUTION_ARTICLES[0]);
   const [actSearch, setActSearch] = useState('');
@@ -79,7 +83,8 @@ export const ConstitutionMaster: React.FC = () => {
             { id: 'map', label: 'Constitution Map' },
             { id: 'amendments', label: 'Amendment Tracker' },
             { id: 'basicStructure', label: 'Basic Structure' },
-            { id: 'comparative', label: 'Comparative' }
+            { id: 'comparative', label: 'Comparative' },
+            { id: 'books', label: 'PDF Books & NCERTs' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -855,6 +860,132 @@ export const ConstitutionMaster: React.FC = () => {
                 <p className="text-slate-700 mt-1">{selectedCountry.amendmentProcedure}</p>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 8. CONSTITUTION PDF BOOKS & NCERTs */}
+      {activeSubTab === 'books' && (
+        <div className="space-y-6">
+          <div className="border-b border-slate-200 pb-4">
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-blue-900" />
+              <h2 className="text-lg font-bold text-slate-900">
+                Constitution Module: Core NCERT Textbooks & Official Legal Documents
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              Curated repository of foundational NCERT political science textbooks, official Constitution PDFs, Constituent Assembly Debates, and jurisprudential classics.
+            </p>
+          </div>
+
+          {/* Quick NCERT Banner */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-900 to-indigo-900 text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="space-y-1">
+              <div className="font-bold text-sm flex items-center gap-1.5 text-amber-300">
+                <Sparkles className="w-4 h-4" />
+                Foundational NCERT: Class XI "Indian Constitution at Work"
+              </div>
+              <p className="text-slate-200 leading-relaxed">
+                The most essential starting point for Indian Constitution. Explains why constitutions are needed, living document concept, and institutional balances between executive, legislature, and judiciary.
+              </p>
+            </div>
+            <a
+              href="https://ncert.nic.in/textbook.php?keps2=0-10"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl whitespace-nowrap text-center transition-all shadow-xs"
+            >
+              Open Class 11 NCERT ↗
+            </a>
+          </div>
+
+          {/* Grid of Books */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {BOOKS_AND_RESOURCES.filter(b => b.module === 'Constitution').map(b => (
+              <div
+                key={b.id}
+                className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs hover:border-blue-300 transition-all space-y-3 flex flex-col justify-between"
+              >
+                <div className="space-y-2.5">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-100 text-blue-900">
+                      {b.category}
+                    </span>
+                    <span
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                        b.isNCERT
+                          ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                          : b.isOpenAccess
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : 'bg-slate-100 text-slate-600'
+                      }`}
+                    >
+                      {b.isNCERT ? 'NCERT Official PDF' : b.isOpenAccess ? 'Free Gov PDF' : 'Standard Book'}
+                    </span>
+                  </div>
+
+                  <h3 className="font-bold text-sm text-slate-900 leading-snug">{b.title}</h3>
+                  <div className="text-xs text-slate-500 font-medium">
+                    {b.author} • <span className="text-slate-400">{b.publisher}</span>
+                  </div>
+
+                  <p className="text-xs text-slate-600 leading-relaxed">{b.topicCoverage}</p>
+
+                  {/* Key Chapters */}
+                  {b.keyChapters && b.keyChapters.length > 0 && (
+                    <div className="space-y-1">
+                      <span className="text-[11px] font-bold text-slate-800">Key Chapters:</span>
+                      <ul className="text-[11px] space-y-0.5 text-slate-600">
+                        {b.keyChapters.slice(0, 3).map((ch, idx) => (
+                          <li key={idx} className="flex items-start gap-1">
+                            <span className="text-blue-900 font-bold">•</span>
+                            <span className="line-clamp-1">{ch}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Exam Relevance */}
+                  <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 text-[11px] text-slate-700 space-y-1">
+                    <div>
+                      <strong className="text-slate-900">Exam Relevance: </strong>
+                      {b.examRelevance}
+                    </div>
+                    <div>
+                      <strong className="text-slate-900">Suggested Use: </strong>
+                      {b.suggestedUse}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs gap-2">
+                  <span className="text-[11px] text-slate-400 font-medium">{b.level}</span>
+                  <div className="flex items-center gap-1.5">
+                    {b.isOpenAccess && (
+                      <a
+                        href={b.directPdfUrl || b.officialOrLegitimateLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2.5 py-1 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold flex items-center gap-1 text-[11px] transition-all shadow-xs"
+                      >
+                        <Download className="w-3 h-3" />
+                        <span>Open PDF</span>
+                      </a>
+                    )}
+                    <a
+                      href={b.officialOrLegitimateLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-600 hover:text-slate-900 font-semibold flex items-center gap-0.5 text-[11px]"
+                    >
+                      <span>Portal ↗</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

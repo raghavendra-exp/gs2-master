@@ -17,21 +17,25 @@ import {
   Vote,
   Building2,
   Briefcase,
-  AlertTriangle
+  AlertTriangle,
+  Download,
+  Sparkles,
+  BookMarked
 } from 'lucide-react';
 import {
   POLITY_TOPICS,
   INSTITUTIONAL_BODIES,
   RPA_PROVISIONS_DATA,
   PRESSURE_GROUPS_DATA,
-  EXECUTIVE_STRUCTURE_DATA
+  EXECUTIVE_STRUCTURE_DATA,
+  BOOKS_AND_RESOURCES
 } from '../../data';
 import { useUserData } from '../../context/UserDataContext';
 import { useExamMode } from '../../context/ExamModeContext';
 import { SourceBadge } from '../common/SourceBadge';
 
 export const PolityExplorer: React.FC = () => {
-  const [activeSubTab, setActiveSubTab] = useState<'topics' | 'federalism' | 'separation' | 'parliamentFlow' | 'bodies' | 'rpa' | 'pressureGroups' | 'executive' | 'diagramLab'>('topics');
+  const [activeSubTab, setActiveSubTab] = useState<'topics' | 'federalism' | 'separation' | 'parliamentFlow' | 'bodies' | 'rpa' | 'pressureGroups' | 'executive' | 'diagramLab' | 'books'>('topics');
   const [selectedTopic, setSelectedTopic] = useState(POLITY_TOPICS[0]);
   const [selectedBodyType, setSelectedBodyType] = useState<string>('All');
   const [bodySearch, setBodySearch] = useState<string>('');
@@ -74,7 +78,8 @@ export const PolityExplorer: React.FC = () => {
             { id: 'federalism', label: 'Federalism & 3F' },
             { id: 'separation', label: 'Separation of Powers' },
             { id: 'parliamentFlow', label: 'Legislative Flow' },
-            { id: 'diagramLab', label: 'Diagram Lab' }
+            { id: 'diagramLab', label: 'Diagram Lab' },
+            { id: 'books', label: 'PDF Books & Reports' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -968,6 +973,141 @@ export const PolityExplorer: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 10. PDF BOOKS & OFFICIAL REPORTS */}
+      {activeSubTab === 'books' && (
+        <div className="space-y-6">
+          {/* Header Banner */}
+          <div className="bg-gradient-to-r from-blue-950 via-indigo-900 to-slate-900 text-white rounded-2xl p-6 shadow-md border border-blue-800/40 relative overflow-hidden">
+            <div className="max-w-3xl space-y-3 relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400/20 text-amber-300 rounded-full text-xs font-bold border border-amber-400/30">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Authoritative Polity References & Official PDFs</span>
+              </div>
+              <h2 className="text-xl md:text-2xl font-black text-white">
+                Essential Polity Textbooks, NCERTs & Landmark Commission Reports
+              </h2>
+              <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
+                Direct access to foundational NCERTs (Political Theory, Politics in India Since Independence, Democratic Politics) alongside official open-access government PDFs of landmark commissions—Sarkaria, Punchhi, Kovind Simultaneous Elections Report (2024), and Law Commission Electoral Reform reports.
+              </p>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2 text-xs">
+              <div className="px-3 py-1 bg-white/10 rounded-lg text-slate-200 border border-white/10">
+                📚 NCERT Class 10, 11 & 12
+              </div>
+              <div className="px-3 py-1 bg-white/10 rounded-lg text-slate-200 border border-white/10">
+                🏛️ Sarkaria & Punchhi Reports (ISC)
+              </div>
+              <div className="px-3 py-1 bg-white/10 rounded-lg text-slate-200 border border-white/10">
+                🗳️ Kovind Panel One Nation One Election 2024
+              </div>
+              <div className="px-3 py-1 bg-white/10 rounded-lg text-slate-200 border border-white/10">
+                ⚖️ Law Commission Reports 244 & 255
+              </div>
+            </div>
+          </div>
+
+          {/* Books & Reports Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {BOOKS_AND_RESOURCES.filter(b => b.module === 'Polity').map(b => (
+              <div
+                key={b.id}
+                className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+              >
+                <div className="space-y-3">
+                  {/* Badges */}
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {b.isNCERT && (
+                      <span className="px-2 py-0.5 bg-blue-100 text-blue-900 border border-blue-200 rounded-md text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                        <BookMarked className="w-3 h-3 text-blue-800" />
+                        NCERT Textbook
+                      </span>
+                    )}
+                    {b.isOpenAccess && !b.isNCERT && (
+                      <span className="px-2 py-0.5 bg-emerald-100 text-emerald-900 border border-emerald-200 rounded-md text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                        <FileText className="w-3 h-3 text-emerald-700" />
+                        Free Gov PDF
+                      </span>
+                    )}
+                    {!b.isOpenAccess && (
+                      <span className="px-2 py-0.5 bg-purple-100 text-purple-900 border border-purple-200 rounded-md text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                        Standard Reference
+                      </span>
+                    )}
+                    <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-[10px] font-semibold">
+                      {b.editionOrYear}
+                    </span>
+                  </div>
+
+                  {/* Title & Author */}
+                  <div>
+                    <h3 className="font-bold text-sm text-slate-900 leading-snug">{b.title}</h3>
+                    <p className="text-xs text-slate-500 font-medium mt-0.5">{b.author}</p>
+                    <p className="text-[11px] text-slate-400">{b.publisher}</p>
+                  </div>
+
+                  {/* Topic Coverage */}
+                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                    {b.topicCoverage}
+                  </p>
+
+                  {/* Key Chapters */}
+                  {b.keyChapters && b.keyChapters.length > 0 && (
+                    <div className="pt-2 border-t border-slate-100">
+                      <div className="text-[11px] font-bold text-slate-700 mb-1">Key High-Yield Sections:</div>
+                      <ul className="text-[11px] text-slate-600 space-y-1">
+                        {b.keyChapters.slice(0, 3).map((ch, idx) => (
+                          <li key={idx} className="flex items-start gap-1">
+                            <span className="text-blue-900 font-bold">•</span>
+                            <span className="line-clamp-1">{ch}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Exam Relevance */}
+                  <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 text-[11px] text-slate-700 space-y-1">
+                    <div>
+                      <strong className="text-slate-900">Exam Relevance: </strong>
+                      {b.examRelevance}
+                    </div>
+                    <div>
+                      <strong className="text-slate-900">Suggested Use: </strong>
+                      {b.suggestedUse}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs gap-2">
+                  <span className="text-[11px] text-slate-400 font-medium">{b.level}</span>
+                  <div className="flex items-center gap-1.5">
+                    {b.isOpenAccess && (
+                      <a
+                        href={b.directPdfUrl || b.officialOrLegitimateLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2.5 py-1 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold flex items-center gap-1 text-[11px] transition-all shadow-xs"
+                      >
+                        <Download className="w-3 h-3" />
+                        <span>Open PDF</span>
+                      </a>
+                    )}
+                    <a
+                      href={b.officialOrLegitimateLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-600 hover:text-slate-900 font-semibold flex items-center gap-0.5 text-[11px]"
+                    >
+                      <span>Portal ↗</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

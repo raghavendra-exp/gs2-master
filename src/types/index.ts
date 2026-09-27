@@ -338,6 +338,10 @@ export interface BookResource {
   officialOrLegitimateLink: string;
   isOpenAccess: boolean;
   notes: string;
+  directPdfUrl?: string;
+  isNCERT?: boolean;
+  module?: 'Constitution' | 'Polity' | 'Governance' | 'Social Justice' | 'International Relations';
+  fileFormat?: string;
 }
 
 export interface FlashcardItem {
